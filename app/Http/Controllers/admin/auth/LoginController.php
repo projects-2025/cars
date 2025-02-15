@@ -11,34 +11,60 @@ use Illuminate\Validation\ValidationException;
 class LoginController extends Controller
 {
 
+    protected $redirectTo = 'dashboard/home';
 
     public function __construct()
     {
         $this->middleware('guest:admin')->except('logout');
-
     }
 
     public function login()
     {
         return view('dashboard.pages.auth.login');
     }
+
+
+
     public function checklogin(Request $request)
     {
-        $validated = $request->validate([
-          'email' => 'required|email',
-          'password' => 'required|string|min:8',
+
+        $request->validate([
+
+            'email' => 'required|email',
+            'password' => 'required|string|min:8',
         ]);
 
-        if (Auth::attempt($validated)) {
-          $request->session()->regenerate();
+        if (Auth::guard('admin')->attempt($request->only('email', 'password'))) {
 
-          return redirect()->route('dashboard.home');
+            return redirect()->intended($this->redirectTo);
+        } else {
+
+            return redirect()
+                ->back()
+                ->withInput(['email' => $request->email])
+                ->withErrors('errorResponse', 'these credentails do not match');
         }
-
-        throw ValidationException::withMessages([
-          'credentials' => 'Sorry, incorrect credentials',
-        ]);
     }
+
+
+
+    // public function checklogin(Request $request)
+    // {
+    //     $validated = $request->validate([
+    //       'email' => 'required|email',
+    //       'password' => 'required|string|min:8',
+    //     ]);
+
+    //     if (Auth::guard('admin')->attempt($validated )) {
+    //       $request->session()->regenerate();
+
+    //       return redirect()->route($this->redirectTo);
+    //     }
+
+    //     throw ValidationException::withMessages([
+    //       'credentials' => 'Sorry, incorrect credentials',
+    //     ]);
+    // }
 
     public function logout(Request $request)
     {
@@ -49,6 +75,4 @@ class LoginController extends Controller
 
         return redirect()->route('dashboard.login');
     }
-
-
 }
