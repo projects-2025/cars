@@ -195,7 +195,7 @@
                             </a>
                         </li>
                         <li>
-                            <a href="{{ route('dashboard.update') }}" class="user-item">
+                            <a href="{{ route('dashboard.auth') }}" class="user-item">
                                 <div class="icon">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                         width="24" height="24" color="#ffffff" fill="none">

@@ -18,11 +18,14 @@ Route::prefix('dashboard/')->name('dashboard.')->group(function () {
 
     Route::middleware('auth:admin', 'preventBackHistory')->group(function () {
         Route::get('home', [HomeController::class, 'index'])->name('home');
+        Route::get('auth', [LoginController::class, 'changeAuth'])->name('auth');
+        Route::post('update-auth', [LoginController::class, 'updateAuth'])->name('update');
     });
 
     Route::get('login', [LoginController::class, 'login'])->name('login');
     Route::post('login', [LoginController::class, 'checkLogin'])->name('check');
-    Route::get('update', [LoginController::class, 'changeAuth'])->name('change');
-    Route::post('update', [LoginController::class, 'updateAuth'])->name('update');
+
+
+
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 });

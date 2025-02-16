@@ -58,16 +58,17 @@ class LoginController extends Controller
     public function updateAuth(Request $request)
     {
         $validated =  $request->validate([
-
+            'email' => 'required|email|exists:admins,email',
             'old_password' => 'required',
-            'new_password' => 'required',
+            'new_password' => 'required|min:8',
             'confirm_password' => 'required|same:new_password',
         ]);
 
-        $hashedPassword = Auth::admin()->password;
+        $hashedPassword = Auth::guard('admin')->user()->password;
+
         if (Hash::check($request->old_password, $hashedPassword)) {
-            $admins = Admin::find(Auth::id());
-            $admins->password = bcrypt($request->new_password);
+            $admins = Admin::find(Auth::guard('admin')->id());
+            $admins->password = Hash::make($request->new_password);
             $admins->save();
             return redirect()->back();
         } else {
