@@ -15,6 +15,7 @@ class CitySeeder extends Seeder
     {
         DB::table('cities')->insert([
 
+            // Riyadh Area
             [
                 'title' => 'السليل',
                 'status' => true,
@@ -26,7 +27,7 @@ class CitySeeder extends Seeder
                 'status' => true,
                 'area_id' => '1',
             ],
-
+            // Qassim Area
             [
                 'title' => 'المذنب',
                 'status' => true,
@@ -34,9 +35,21 @@ class CitySeeder extends Seeder
 
             ],
             [
-                'title' => 'ضرية ',
+                'title' => 'الطائف ',
                 'status' => true,
                 'area_id' => '2',
+            ],
+            // Makkah Area
+            [
+                'title' => 'المذنب',
+                'status' => true,
+                'area_id' => '3',
+
+            ],
+            [
+                'title' => 'جدة ',
+                'status' => true,
+                'area_id' => '3',
             ]
         ]);
     }

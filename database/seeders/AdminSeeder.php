@@ -9,7 +9,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB ;
 
-class AdminSeedr extends Seeder
+class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.

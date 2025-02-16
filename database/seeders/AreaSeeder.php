@@ -27,6 +27,11 @@ class AreaSeeder extends Seeder
                     'title' => 'القصيم',
                     'status' => true,
 
+                ],
+                [
+                    'title' => 'مكة المكرمة',
+                    'status' => true,
+
                 ]
             ]);
         }

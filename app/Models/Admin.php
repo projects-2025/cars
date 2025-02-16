@@ -46,5 +46,9 @@ class Admin extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    static public function getSingle($id){
+        return Admin::find($id);
+    }
 }
 
